@@ -1,6 +1,9 @@
 
-" UI
-color desert
+" UI related settings
+syntax enable
+set background=dark
+colorscheme solarized
+
 set nu!
 set laststatus=2
 set statusline=%F%m%=[ASCII=%b][HEX=%B][POS=%l,%v,%p%%][LEN=%L]
