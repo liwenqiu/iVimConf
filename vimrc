@@ -23,11 +23,16 @@ set hidden  " allow siwtch unsaved buffer
 set wmh=0  " winminheight (abbr=>wmh), the minimal height of a window
 set wmw=0  " winminwidth (abbr=>wmw), the minimal width of a window
 
+set backspace=indent,eol,start
+
+set listchars=tab:▸\ ,eol:¬  " display tab char as '▸', and line trail as '¬'
+set list                     " display special char as listchars definition, opposite: set list!
+
 " whitespace
 set nowrap                      " dont't wrap lines
 set tabstop=4 shiftwidth=4      " a tab is four space
 set backspace=indent,eol,start  " backspace through everything in insert mode
-set expandtab                   " use space, not table, opposite: set noexpandtab
+set expandtab                   " use space, not table, opposite: set noexpandtab, opposite: set noexandtab
 
 
 " searching
