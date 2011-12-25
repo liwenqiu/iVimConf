@@ -28,6 +28,8 @@ set backspace=indent,eol,start
 set listchars=tab:▸\ ,eol:¬  " display tab char as '▸', and line trail as '¬'
 set list                     " display special char as listchars definition, opposite: set list!
 
+set wrap  " auto wrap to next line, opposite: nowrap
+
 " whitespace
 set nowrap                      " dont't wrap lines
 set tabstop=4 shiftwidth=4      " a tab is four space
