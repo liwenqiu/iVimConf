@@ -58,8 +58,8 @@ nmap <c-j> <c-w>j
 nmap <c-k> <c-w>k
 nmap <c-l> <c-w>l
 
-nmap <c-=> <c-w>+  " resize window
-nmap <c--> <c-w>-
+"nmap <c-]> <c-w>+  " resize window
+"nmap <c-[> <c-w>-
 
 imap <c-h> <left>   " move cursor in insert mode
 imap <c-l> <right>
