@@ -13,3 +13,18 @@
 [submodule "bundle/snipmate"]
 	path = bundle/snipmate
 	url = git://github.com/msanders/snipmate.vim.git
+[submodule "bundle/vim-pathogen"]
+	path = bundle/vim-pathogen
+	url = git://github.com/tpope/vim-pathogen.git
+[submodule "bundle/cocoa"]
+	path = bundle/cocoa
+	url = git://github.com/msanders/cocoa.vim.git
+[submodule "bundle/cocoa.vim"]
+	path = bundle/cocoa.vim
+	url = git://github.com/msanders/cocoa.vim.git
+[submodule "bundle/nginx.vim"]
+	path = bundle/nginx.vim
+	url = git://github.com/vim-scripts/nginx.vim.git
+[submodule "bundle/vim-octopress"]
+	path = bundle/vim-octopress
+	url = git://github.com/tangledhelix/vim-octopress.git

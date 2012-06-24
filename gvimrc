@@ -1,34 +1,25 @@
 
-" 
-" Generic gui settings
-"
-if has("gui")
+set guioptions-=T                      " hide toolbar
+set guioptions-=r                      " hide right-hand scrollbar
+set guioptions-=l                      " hide left-hand scrollbar
+set guioptions-=L                      " hide left-hand scrollbar while there is vertically split window
+set guioptions-=m                      " hide menubar
 
-" hide toolbar
-set guioptions-=T
-" hide right-hand scrollbar
-set guioptions-=r
-" hide left-hand scrollbar
-set guioptions-=l
-" hide left-hand scrollbar when there is vertically splite window
-set guioptions-=L
 
-endif
 
-"
-" MacVim gui settings
 if has("gui_macvim")
 
-" unbind mac menu key
-macmenu &File.Print key=<nop>
+" unbind macvim menu key binding
 macmenu &File.New\ Tab key=<nop>
+macmenu &File.Print key=<nop>
+
 macmenu &Tools.Make key=<nop>
 
-" bind short-key for Command-T
-nmap <D-t> :CommandT<cr>
-nmap <D-b> :CommandTBuffer<cr>
+" short-key binding
 
-" bind short-key for nerdtree
-nmap <D-e> :NERDTreeToggle<cr>
+nmap <d-e> :NERDTreeToggle<cr>
+
+nmap <d-t> :CommandT<cr>
+nmap <d-b> :CommandTBuffer<cr>
 
 endif
