@@ -16,3 +16,6 @@
 [submodule "bundle/nginx.vim"]
 	path = bundle/nginx.vim
 	url = git://github.com/vim-scripts/nginx.vim.git
+[submodule "bundle/snipmate.vim"]
+	path = bundle/snipmate.vim
+	url = git://github.com/msanders/snipmate.vim.git
