@@ -37,11 +37,14 @@ syntax on                              " syntax highlight
 set hlsearch                           " search highlighting
 set incsearch                          " incremental search
 syntax enable
-"set t_Co=256
+set t_Co=256
 set gcr=a:block-blinkon0               " disable cursor flash
 
-set background=dark
-colorscheme solarized
+if has("gui")
+  set background=dark
+  colorscheme solarized
+endif
+
 
 
 set nobackup                           " no *~ backup files
@@ -115,3 +118,28 @@ autocmd WinLeave * setlocal nocursorline
 "nmap <leader>v :tabe $MYVIMRC<CR>
 "map <leader>0 :topleft 100 :split README.md<CR>
 
+
+" customize UI 
+set guioptions-=T                      " hide toolbar
+set guioptions-=r                      " hide right-hand scrollbar
+set guioptions-=l                      " hide left-hand scrollbar
+set guioptions-=L                      " hide left-hand scrollbar while there is vertically split window
+set guioptions-=m                      " hide menubar
+
+
+if has("gui_macvim")
+
+" unbind macvim menu key binding
+macmenu &File.New\ Tab key=<nop>
+macmenu &File.Print key=<nop>
+
+macmenu &Tools.Make key=<nop>
+
+" short-key binding
+
+nmap <d-e> :NERDTreeToggle<cr>
+
+nmap <d-t> :CommandT<cr>
+nmap <d-b> :CommandTBuffer<cr>
+
+endif
