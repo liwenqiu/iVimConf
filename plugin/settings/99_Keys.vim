@@ -35,12 +35,6 @@ map <leader>r :NERDTreeFind<cr>
 " =====================================
 if has("gui_macvim")
 
-  " unbind macvim menu key binding
-  macmenu &File.New\ Tab key=<nop>
-  macmenu &File.Print key=<nop>
-
-  macmenu &Tools.Make key=<nop>
-
   " short-key binding
 
   nmap <d-e> :NERDTreeToggle<cr>
