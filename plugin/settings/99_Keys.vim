@@ -51,3 +51,17 @@ if has("gui_macvim")
 endif
 
 
+if has("gui_win32")
+
+  " Ctrl + C/V/X, for copy/past/cut
+  map <c-c> "+y
+  map <c-v> "+p
+  map <c-x> "+x
+
+  " short-key binding
+  nmap <m-e> :NERDTreeToggle<cr>
+
+  nmap <m-t> :CommandT<cr>
+  nmap <m-b> :CommandTBuffer<cr>
+
+endif

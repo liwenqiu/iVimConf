@@ -15,3 +15,9 @@ set background=dark
 colorscheme solarized
 
 endif
+
+if has("gui_win32")
+
+set guifont=DejaVu\ Sans\ Mono:h10
+
+endif

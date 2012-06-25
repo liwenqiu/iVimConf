@@ -15,13 +15,14 @@ set numberwidth=4
 set title
 set showmode
 set nobomb                             " no BOM (Byte Order Mark)
-"set nostartofline
+set nostartofline
 set laststatus=2
 set clipboard+=unnamed
 set splitright                         " always open vertical split window in the right side
 set splitbelow                         " always open horizontal split window below
 set scrolloff=5                        " start scrolling when n lines away from margins
 set switchbuf=useopen
+
 "set showtabline=2                      " always show tab
 "set wildmode=longest,list              " use emacs-style tab completion when selecting files, etc
 "set wildmenu                           " make tab completion for files/buffers act like bash
@@ -61,9 +62,11 @@ set tm=500
 
 " file encoding
 set encoding=utf-8
-set fileencodings=utf-8,ucs-bom,big5,euc-jp,gbk,euc-kr,utf-bom,iso8859-1,euc-jp,utf-16le,latin1
-set fenc=utf-8 enc=utf-8 tenc=utf-8
+set fileencoding=utf-8 enc=utf-8 tenc=utf-8
+set fileencodings=utf-8,chinese,ucs-bom,big5,euc-jp,gbk,euc-kr,utf-bom,iso8859-1,euc-jp,utf-16le,latin1
 scriptencoding utf-8
+
+nmap <m-e> :NERDTreeToggle<cr>
 
 " ignores
 set wildignore+=*.o,*.obj,*.pyc                  " output objects
@@ -80,32 +83,6 @@ set wildignore+=tmp/**
 autocmd WinEnter * setlocal cursorline
 autocmd WinLeave * setlocal nocursorline
 
-
-
-" ======================================
-"  custom key and plugin configurations
-" ======================================
-" remove tailing whitespace
-"autocmd BufWritePre * :%s/\s\+$//e
-
-" comment
-"map <Leader><Leader> <Leader>c<space>
-
-" next and prev tab
-"noremap <F7> gT
-"noremap <F8> gt
-
-" identation
-"nmap <TAB> v>
-"nmap <S-TAB> v<
-"vmap <TAB> >gv
-"vmap <S-TAB> <gv
-
-" remap VIM 0
-"map 0 ^
-
-" return current opened file's dirctory
-"cnoremap %% <C-R>=expand('%:h').'/'<CR>
 
 " quick open vimrc in a new tab
 "nmap <leader>v :tabe $MYVIMRC<CR>
