@@ -6,7 +6,7 @@ set ruler                              " show the cursor position all the time
 set autoread                           " auto read when file is changed from outside
 set wrap                               " auto wrap large text to next line
 set linebreak
-set nolist
+set list                               " default list mode
 set hidden
 set linespace=0
 set nofoldenable
@@ -40,6 +40,8 @@ set incsearch                          " incremental search
 syntax enable
 set t_Co=256
 set gcr=a:block-blinkon0               " disable cursor flash
+
+set listchars=tab:>-,trail:-           " display tab as >---
 
 set nobackup                           " no *~ backup files
 set noswapfile
@@ -82,6 +84,8 @@ set wildignore+=tmp/**
 " cursorline switched while focus is switched to another split window
 autocmd WinEnter * setlocal cursorline
 autocmd WinLeave * setlocal nocursorline
+
+autocmd FileType make set noexpandtab
 
 
 " quick open vimrc in a new tab
