@@ -20,4 +20,6 @@ if has("gui_win32")
 
 set guifont=DejaVu\ Sans\ Mono:h10
 
+language messages zh_CN.UTF-8
+
 endif
