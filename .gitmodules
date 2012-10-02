@@ -22,3 +22,6 @@
 [submodule "bundle/vim-octopress"]
 	path = bundle/vim-octopress
 	url = git://github.com/tangledhelix/vim-octopress.git
+[submodule "bundle/vim-objc"]
+	path = bundle/vim-objc
+	url = git://github.com/b4winckler/vim-objc.git

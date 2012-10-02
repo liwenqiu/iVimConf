@@ -16,6 +16,13 @@ colorscheme solarized
 
 endif
 
+if has("gui_macvim")
+
+set guifont=Source\ Code\ Pro:h12
+
+endif
+
+
 if has("gui_win32")
 
 set guifont=DejaVu\ Sans\ Mono:h10
