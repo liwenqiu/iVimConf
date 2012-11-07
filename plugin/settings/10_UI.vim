@@ -18,7 +18,7 @@ endif
 
 if has("gui_macvim")
 
-set guifont=Source\ Code\ Pro:h12
+set guifont=Source\ Code\ Pro\ for\ Powerline:h12
 
 endif
 
@@ -30,3 +30,9 @@ set guifont=DejaVu\ Sans\ Mono:h10
 language messages zh_CN.UTF-8
 
 endif
+
+" =====================================
+" Powerline Setting
+" =====================================
+set guifont=PowerlineSymbols\ for\ Powerline
+let g:Powerline_symbols='fancy'
