@@ -26,7 +26,8 @@ endif
 
 if has("gui_win32")
 
-set guifont=DejaVu\ Sans\ Mono:h10
+"set guifont=DejaVu\ Sans\ Mono:h10
+set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h10
 
 language messages zh_CN.UTF-8
 
