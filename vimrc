@@ -108,6 +108,11 @@ set hlsearch
 set incsearch
 
 
+" no change IM when in insert/serach mode 
+set iminsert=0
+set imsearch=-1
+
+
 " ### Hot Key ###
 
 let mapleader=','
@@ -139,11 +144,20 @@ imap <c-j> <down>
 imap <c-k> <up>
 
 " go to home and end using capitalized directions
-noremap H 0
+noremap H ^
 noremap L $
 
 " remap VIM 0 to first non-blank character
 "map 0 ^
+
+
+" turn off the highlight search match
+noremap <silent><leader>/ :nohlsearch<cr>
+
+" inoremap qq <esc>
+
+" i can type :help on my own, thanks
+noremap <F1> <esc>
 
 filetype off
 
@@ -225,6 +239,17 @@ Bundle 'Yggdroot/indentLine'
 let g:indentLine_noConcealCursor=1
 let g:indentLine_color_term=0
 let g:indentLine_char='¦'
+
+
+" ### vim-expand-region ###
+" for visual selection
+Bundle 'terryma/vim-expand-region'
+map = <Plug>(expand-region-expand)
+map - <Plug>(expand-region-shrink)
+
+
+" ### vim-golang ###
+Bundle 'jnwhiteh/vim-golang'
 
 
 filetype plugin indent on
