@@ -38,6 +38,7 @@ set linespace=0
 
 set nofoldenable
 
+" show line number
 set number
 
 set numberwidth=4
@@ -59,7 +60,7 @@ set clipboard+=unnamed
 " disable cursor flash
 set gcr=a:block-blinkon0
 
-" disable sound on error occurred
+" no annoying sound on errors
 set novisualbell
 set noerrorbells
 set t_vb=
@@ -79,7 +80,14 @@ set expandtab
 set encoding=utf-8
 set fileencoding=utf-8 enc=utf-8 tenc=utf-8
 set fileencodings=utf-8,chinese,ucs-bom,big5,euc-jp,gbk,euc-kr,utf-bom,iso8859-1,euc-jp,utf-16le,latin1
+set termencoding=utf-8
 scriptencoding utf-8
+
+" use unix as the standard file type
+set ffs=unix,dos,mac
+
+
+set completeopt=longest,menu
 
 " always open vertical split window in the right side
 set splitright
@@ -90,7 +98,9 @@ set splitbelow
 set scrolloff=5
 set switchbuf=useopen
 
+" highlight current column
 set cursorcolumn
+" highlight current line
 set cursorline
 
 " show the match brackets
@@ -106,6 +116,11 @@ syntax on
 set hlsearch
 " incremental search
 set incsearch
+" ignore case sensitive when searching
+set ignorecase
+
+" remove splash wording
+set shortmess=tI
 
 
 " no change IM when in insert/serach mode 
@@ -134,7 +149,7 @@ endif
 
 " select all content
 if has("gui_macvim")
-    nmap <d-a> <esc>ggVG
+    map <leader>sa ggVG"
 endif
 
 " move cursor in insert mode
@@ -159,6 +174,15 @@ noremap <silent><leader>/ :nohlsearch<cr>
 " i can type :help on my own, thanks
 noremap <F1> <esc>
 
+
+nnoremap <F2> :set nonumber! number?<cr>
+nnoremap <F3> :set list! list?<cr>
+nnoremap <F4> :set wrap! wrap?<cr>
+
+nmap t o<esc>
+nmap T O<esc>
+
+" vundle required!
 filetype off
 
 set rtp+=~/.vim/bundle/vundle/
@@ -190,6 +214,39 @@ let g:NERDTreeWinSize=30
 
 " close vim if the only window left open is a NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+
+
+" ### tarbar ###
+Bundle 'majutsushi/tagbar'
+nmap <leader>o :TagbarToggle<cr>
+let g:tagbar_autofocus=1
+let g:tagbar_type_go = {
+    \ 'ctagstype' : 'go',
+    \ 'kinds'     : [
+        \ 'p:package',
+        \ 'i:imports:1',
+        \ 'c:constants',
+        \ 'v:variables',
+        \ 't:types',
+        \ 'n:interfaces',
+        \ 'w:fields',
+        \ 'e:embedded',
+        \ 'm:methods',
+        \ 'r:constructor',
+        \ 'f:functions'
+    \ ],
+    \ 'sro' : '.',
+    \ 'kind2scope' : {
+        \ 't' : 'ctype',
+        \ 'n' : 'ntype'
+    \ },
+    \ 'scope2kind' : {
+        \ 'ctype' : 't',
+        \ 'ntype' : 'n'
+    \ },
+    \ 'ctagsbin' : 'gotags',
+    \ 'ctagsargs' : '-sort -silent'
+    \ }
 
 
 " ### vim-colors-solarized ###
