@@ -158,7 +158,10 @@ Bundle 'gmarik/vundle'
 Bundle 'scrooloose/nerdtree'
 
 if has("gui_macvim")
-  nmap <d-e> :NERDTreeToggle<cr>
+    nmap <d-e> :NERDTreeToggle<cr>
+endif
+if has("gui_win32")
+    nmap <m-e> :NERDTreeToggle<cr>
 endif
 
 let NERDTreeHighlightCursorline=1
@@ -211,6 +214,10 @@ if has("gui_macvim")
     nmap <d-b> :CtrlPBuffer<cr>
     nmap <d-t> :CtrlP<cr>
 endif
+if has("gui_win32")
+    nmap <m-b> :CtrlPBuffer<cr>
+    nmap <m-t> :CtrlP<cr>
+endif
 
 
 " ### indentLine ###
@@ -219,7 +226,10 @@ let g:indentLine_noConcealCursor=1
 let g:indentLine_color_term=0
 let g:indentLine_char='¦'
 
+
 filetype plugin indent on
+
+" ### GUI setting ###
 
 if has("gui_running")
     set guioptions-=T
@@ -227,6 +237,7 @@ if has("gui_running")
     set guioptions-=r
     set guioptions-=l
     set guioptions-=L
+    set guioptions-=m
     set showtabline=1
     set noimd
     set t_Co=256
@@ -234,6 +245,11 @@ endif
 
 if has("gui_macvim")
     set guifont=Source\ Code\ Pro\ for\ Powerline:h12
+endif
+
+if has("gui_win32")
+    set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h10
+    language messages en_US.UTF-8
 endif
 
 
