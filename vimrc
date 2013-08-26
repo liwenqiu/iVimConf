@@ -306,7 +306,26 @@ map - <Plug>(expand-region-shrink)
 
 
 " ### vim-golang ###
-Bundle 'jnwhiteh/vim-golang'
+" Bundle 'jnwhiteh/vim-golang'
+
+
+" ### vim-gocode ###
+Bundle 'Blackrush/vim-gocode'
+
+
+" ### YouCompleteMe ###
+" Bundle 'Valloric/YouCompleteMe'
+
+
+" ### supertab ###
+" Bundle 'ervandew/supertab'
+" let g:SuperTabDefaultCompletionType="<c-x><c-o>"
+" let g:SuperTabRetainCompletonType=2
+
+
+" ### clang_complete ###
+" Bundle 'Rip-Rip/clang_complete'
+" let g:clang_use_library=1
 
 
 filetype plugin indent on
@@ -332,6 +351,11 @@ endif
 if has("gui_win32")
     set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h10
     language messages en_US.UTF-8
+
+    " support windows ctrl-c,ctrl-v,ctrl-x
+    map <c-c> "+y
+    map <c-v> "+p
+    map <c-x> "+x
 endif
 
 
