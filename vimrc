@@ -80,8 +80,9 @@
 
     set autoread                        " automatically read while file is changed from outside
 
-    set novisualbell                    " No annoying sound on errors
-    set noerrorbells
+    " No annoying sound on errors
+    set novisualbell                    " don't beep
+    set noerrorbells                    " don't beep
     set t_vb=
     set tm=500
 
@@ -92,7 +93,9 @@
     au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
 
     " Setting up the directories {
-        set backup                   " Backups are nice ...
+        set nobackup
+        set noswapfile
+        "set backup                   " Backups are nice ...
         if has('persistent_undo')
             set undofile                 " So is persistent undo ...
             set undolevels=1000          " Maximum number of changes that can be undone
@@ -109,6 +112,11 @@
                 \ ]
         endif
     " }
+
+    set foldenable
+    set foldmethod=indent
+    set foldlevel=99
+
 " }
 
 " Vim UI {
@@ -123,6 +131,7 @@
 
     set tabpagemax=15               " Only show 15 tabs
     set showmode                    " Display the current mode
+    set shortmess=atI
 
     set gcr=a:block-blinkon0        " Display cursor flash
 
@@ -262,6 +271,10 @@
 
     " Vundle {
         Bundle 'gmarik/vundle'
+        " vim plugin bundle control, command model
+        " :BundleInstall     install
+        " :BundleInstall!    update
+        " :BundleClean       remove plugin not in list
     " }
 
     " NerdTree {
@@ -402,14 +415,14 @@
 
     if has('gui_running')
 
-        set guioptions-=T
-        set guioptions+=e
-        set guioptions-=r
-        set guioptions-=l
-        set guioptions-=L
-        set guioptions-=m
+        set guioptions-=T            " Exclude Toolbar
+        set guioptions+=e            " Add tab pages
+        set guioptions-=r            " Exclude Right-hand scrollbar
+        set guioptions-=l            " Exclude Left-hand scrollbar
+        set guioptions-=L            " Exclude Left-hand scrollbar even there is a vertically split window
+        set guioptions-=m            " Exclude Menu bar
         set showtabline=1
-        set noimd
+
         set t_Co=256
 
         if has('gui_macvim')
