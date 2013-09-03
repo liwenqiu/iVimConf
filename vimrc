@@ -32,8 +32,8 @@
 
     " Setup Bundle Support {
         " The next thress lines ensure that the ~/.vim/bundle system works
-        filetype on
         filetype off
+        filetype plugin indent off
         set rtp+=~/.vim/bundle/vundle/
         call vundle#rc()
     " }
@@ -49,8 +49,7 @@
     if !has('gui')
         "set term=$TERM          " Make arrow and other keys work
     endif
-    filetype plugin indent on   " Automatically detect file types
-    syntax on                   " Syntax highlighting
+
     set mouse=a                 " Automatically enable mouse usage
     set mousehide               " Hide the mouse cursor while typing
     scriptencoding utf-8
@@ -132,10 +131,6 @@
     set tabpagemax=15               " Only show 15 tabs
     set showmode                    " Display the current mode
     set shortmess=atI
-
-    set gcr=a:block-blinkon0        " Display cursor flash
-
-    set cursorline                  " Highlight current line
 
     highlight clear SignColumn      " SignColumn should match background for
                                   " things like vim-gitgutter
@@ -405,10 +400,17 @@
         map - <Plug>(expand-region-shrink)
     " }
 
-    " Vim-Gocode {
-        Bundle 'Blackrush/vim-gocode'
+    " Vim-Golang {
+        Bundle 'jnwhiteh/vim-golang'
     " }
 
+    " Vim-Gocode {
+    "    Bundle 'Blackrush/vim-gocode'
+    " }
+
+    syntax on
+    filetype plugin indent on        " Automatically detect file type
+    "syntax on                        " Syntax highlighting
 " }
 
 " GUI Settings {
@@ -424,6 +426,9 @@
         set showtabline=1
 
         set t_Co=256
+
+        " Disable cursor flash
+        set guicursor=a:block-blinkon0
 
         if has('gui_macvim')
             set guifont=Source\ Code\ Pro\ for\ Powerline:h12
@@ -449,13 +454,5 @@
     endif
 
 " }
-
-
-
-
-
-
-
-
 
 
