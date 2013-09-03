@@ -324,7 +324,7 @@
                 \ 'ntype' : 'n'
             \ },
             \ 'ctagsbin' : 'gotags',
-            \ 'ctagsargs' : '-sort -silent'
+            \ 'ctagsargs' : '-sort'
         \ }
     " }
 
@@ -403,12 +403,13 @@
         map - <Plug>(expand-region-shrink)
     " }
 
-    " Vim-Golang {
-        Bundle 'jnwhiteh/vim-golang'
+    " Vim-Gocode {
+        Bundle 'Blackrush/vim-gocode'
     " }
 
-    " Vim-Gocode {
-    "    Bundle 'Blackrush/vim-gocode'
+
+    " Vim-Golang {
+    "    Bundle 'jnwhiteh/vim-golang'
     " }
 
     syntax on
