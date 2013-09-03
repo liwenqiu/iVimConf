@@ -335,8 +335,11 @@
     " Vim-Colors-Solarized {
         Bundle 'altercation/vim-colors-solarized'
 
-        colorscheme solarized
-        set t_Co=256
+        if filereadable(expand("~/.vim/bundle/vim-colors-solarized/colors/solarized.vim"))
+            colorscheme solarized
+            set t_Co=256
+        endif
+
     " }
 
     " Vim-Powerline {
