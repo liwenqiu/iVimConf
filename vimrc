@@ -176,8 +176,13 @@
     set scrolljump=5                " Lines to scroll when cursor leaves screen
     set foldenable                  " Auto fold code
     set list
-    set listchars=tab:›\ ,trail:•,extends:#,nbsp:. " Highlight problematic whitespace
 
+    " Highlight problematic whitespace
+    if has('win32') || has('win64')
+        set listchars=tab:>-,trail:-,extends:#,nbsp:.
+    else
+        set listchars=tab:›\ ,trail:•,extends:#,nbsp:.
+    endif
 
 " }
 
@@ -260,6 +265,7 @@
     noremap <F3> :set list! list?<cr>
     noremap <F4> :set wrap! wrap?<cr>
 
+    inoremap <leader><leader> <c-x><c-o>
 " }
 
 " Plugins {
