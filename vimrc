@@ -281,11 +281,11 @@
     " NerdTree {
         Bundle 'scrooloose/nerdtree'
 
-        map <C-e> :NERDTreeToggle<CR>:NERDTreeMirror<CR>
-        map <leader>e :NERDTreeFind<CR>
+        map <leader>e :NERDTreeToggle<CR>
         nmap <leader>nt :NERDFreeFind<CR>
 
         let NERDTreeShowBookmarks=1
+        let NERDTreeMinimalUI=1
         let NERDTreeIgnore=['\.pyc', '\~$', '\.swo$', '\.swp$', '\.git', '\.hg', '\.svn', '\.bzr']
         let NERDTreeChDirMode=0
         let NERDTreeQuitOnOpen=1
@@ -294,12 +294,13 @@
         let NERDTreeKeepTreeInNewTab=1
         let NERDTreeWinSize=30
         let g:nerdtree_tabs_open_on_gui_startup=0
+        let NERDTreeBookmarksFile=expand("~/.vim/.NERDTreeBookmarks")
     " }
 
     " TagBar {
         Bundle 'majutsushi/tagbar'
 
-        nnoremap <silent> <leader>tt :TagbarToggle<CR>
+        nnoremap <silent><leader>tt :TagbarToggle<CR>
 
         "let g:tagbar_autofocus=1
         " If using go please install the gotags program using the following
@@ -332,10 +333,14 @@
             \ 'ctagsbin' : 'gotags',
             \ 'ctagsargs' : '-sort'
         \ }
+        let g:tarbar_compact = 1    " doesn't show 'help' in top of window
     " }
 
     " Vim-EasyMotion {
         Bundle 'Lokaltog/vim-easymotion'
+        " Default Trigger Key is <leader><leader>
+        " example: type <leader><leader>w to trigger the word motion
+        "          type <leader><leader>fo to trigger search 'o' character
     " }
 
     " Vim-Colors-Solarized {
@@ -357,9 +362,9 @@
     " CtrlP {
         Bundle 'kien/ctrlp.vim'
 
-        nnoremap <silent> <D-t> :CtrlP<CR>
-        nnoremap <silent> <D-r> :CtrlPMRU<CR>
-        nnoremap <silent> <D-b> :CtrlPBuffer<CR>
+        nnoremap <silent><leader>t :CtrlP<CR>
+        nnoremap <silent><leader>r :CtrlPMRU<CR>
+        nnoremap <silent><leader>b :CtrlPBuffer<CR>
 
         let g:ctrlp_working_path_mode='ra'
         let g:ctrlp_custom_ignore = {
