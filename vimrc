@@ -266,6 +266,16 @@
     noremap <F4> :set wrap! wrap?<cr>
 
     inoremap <leader><leader> <c-x><c-o>
+
+    " select all
+    noremap <c-a> <esc>ggVG
+
+    if has('gui_win32')
+        " Ctrl + C/V/X for copy/past/cut
+        map <c-c> "+y
+        map <c-v> "+p
+        map <c-x> "+x
+    endif
 " }
 
 " Plugins {
