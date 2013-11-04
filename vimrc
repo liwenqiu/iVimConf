@@ -456,7 +456,8 @@
         set guicursor=a:block-blinkon0
 
         if has('gui_macvim')
-            set guifont=Source\ Code\ Pro\ for\ Powerline:h12
+            "set guifont=Source\ Code\ Pro\ for\ Powerline:h12
+            set guifont=Menlo\ for\ Powerline:h11
 
             "set transparency=5      " Make the window slightly transparent
         endif
