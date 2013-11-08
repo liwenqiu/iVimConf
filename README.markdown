@@ -8,10 +8,13 @@
 
 ## Quick start
 
-1. Setup [Vundle]:
+1. Install Vim plus
 
     ```
+    $ git clone https://github.com/liwenqiu/vim-plus.git ~/.vim
     $ git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+    $ ln -s ~/.vim/vimrc ~/.vimrc
+    $ ln -s ~/.vim/gvimrc ~/.gvimrc
     ```
 
 2. Install Plugins
