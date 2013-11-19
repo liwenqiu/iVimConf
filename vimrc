@@ -364,9 +364,20 @@
     " }
 
     " Vim-Powerline {
-        Bundle 'Lokaltog/vim-powerline'
+        "Bundle 'Lokaltog/vim-powerline'
 
-        let g:Powerline_symbols='fancy'
+        "let g:Powerline_symbols='fancy'
+    " }
+
+    " Vim-Airline {
+        Bundle 'bling/vim-airline'
+
+        let g:airline_powerline_fonts=1
+        let g:airline_theme='dark'
+        "let g:airline_enable_branch=1
+        "let g:airline_enable_syntastic=1
+        "let g:airline_detect_paste=1
+        "let g:airline_theme='dark'
     " }
 
     " CtrlP {
@@ -458,6 +469,7 @@
         if has('gui_macvim')
             "set guifont=Source\ Code\ Pro\ for\ Powerline:h12
             set guifont=Menlo\ for\ Powerline:h11
+            "set guifont=DejaVn\ Sans\ Mono\ for\ Powerline
 
             "set transparency=5      " Make the window slightly transparent
         endif
