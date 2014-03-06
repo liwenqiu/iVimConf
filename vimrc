@@ -176,7 +176,7 @@
     set whichwrap=b,s,h,l,<,>,[,]   " Backspace and cursor keys wrap too
     set scrolljump=5                " Lines to scroll when cursor leaves screen
     set foldenable                  " Auto fold code
-    set list
+    set nolist
 
     " Highlight problematic whitespace
     if has('win32') || has('win64')
