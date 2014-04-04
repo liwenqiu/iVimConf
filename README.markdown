@@ -31,3 +31,45 @@
 
     for more pretty statusline settings, please refer to [Powerline for vim](https://github.com/Lokaltog/vim-powerline)
 
+
+## Keymap
+
+1. Vim-Youdao-Translater
+
+    <leader>yd
+
+    normal模式下翻译光标下的单词
+
+
+2. NerdTREE
+
+    <leader>e
+
+    打开文件列表
+
+    <leader>nt
+
+    搜索文件列表
+
+
+3. TagBar
+
+    <leader>tt
+
+    显示/隐藏标签窗口
+
+4. CtrlP
+
+    <leader>t
+
+    打开文件搜索框
+
+    <leader>r
+
+    搜索最近打开的文件
+
+    <leader>b
+
+    显示缓冲区文件列表
+
+
