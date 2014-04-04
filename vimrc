@@ -436,6 +436,12 @@
         map - <Plug>(expand-region-shrink)
     " }
 
+    " Vim-Youdao-Translater {
+        Bundle 'ianva/vim-youdao-translater'
+
+        nnoremap <silent><leader>yd <esc>:Ydc<CR>
+    " }
+
     " Vim-Gocode {
         Bundle 'Blackrush/vim-gocode'
     " }
