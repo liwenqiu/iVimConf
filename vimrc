@@ -6,58 +6,97 @@
 "   You can find me at http://liwenqiu.mc
 "  }
 
+" Environment {
+
+    " Identify platform {
+        silent function! OSX()
+            return has('macunix')
+        endfunction
+        silent function! LINUX()
+            return has('unix') && !has('macunix') && !has('win32unix')
+        endfunction
+        silent function! WINDOWS()
+            return (has('win16') || has('win32') || has('win64'))
+        endfunction
+    " }
+
+    " no compatible with the old-fashion vi mode
+    set nocompatible
+    if !WINDOWS()
+        set shell=/bin/sh
+    endif
+
+    " Windows Compatible {
+        " On Windows, also use '.vim' instead of 'vimfiles'; this makes syncronization
+        " across (heterogeneous) systems easier.
+        if WINDOWS()
+            set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
+        endif
+    " }
+
+    " no switch IM while in insert/search mode
+    set iminsert=0
+    set imsearch=-1
+" }
+
 " Use vimrc beform if available {
     if filereadable(expand("~/.vimrc.before"))
         source ~/.vimrc.before
     endif
 " }
 
-" Environment {
+" Plugins {
+    " no compatible with the old-fashion vi mode
+    set nocompatible
+    filetype off
+    " set the runtime path to include Vundle and initialize
+    set rtp+=~/.vim/bundle/Vundle.vim
 
-    " Basics {
-        " Not compatible with the old-fashion vi mode
-        set nocompatible        " Must be first line
-        if !(has('win16') || has('win32') || has('win64'))
-            set shell=/bin/sh
-        endif
-    " }
+    call vundle#begin()
+    " :PluginList          - list configured plugins
+    " :PluginInstall(!)    - install (update) plugins
+    " :PluginUpdate        - update plugins
+    " :PluginSearch(!) foo - search (or refresh cache first) for foo
+    " :PluginClean(!)      - confirm (or auto-approve) removal of unused plguins
 
-    " Windows Compatible {
-        " On Windows, also use '.vim' instead of 'vimfiles'; this makes syncronization
-        " across (heterogeneous) systems easier.
-        if has('win32') || has('win64')
-            set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
-        endif
-    " }
-
-    " Setup Bundle Support {
-        " The next thress lines ensure that the ~/.vim/bundle system works
-        filetype off
-        filetype plugin indent off
-        set rtp+=~/.vim/bundle/vundle/
-        call vundle#rc()
-    " }
-
-    " No switch IM while in insert/search mode
-    set iminsert=0
-    set imsearch=-1
-
+    Plugin 'gmarik/Vundle.vim'
+    Plugin 'scrooloose/nerdtree'
+    Plugin 'majutsushi/tagbar'
+    Plugin 'Lokaltog/vim-easymotion'
+    Plugin 'spiiph/vim-space'
+    "Plugin 'altercation/vim-colors-solarized'
+    Plugin 'tomasr/molokai'
+    "Plugin 'Lokaltog/vim-powerline'
+    Plugin 'bling/vim-airline'
+    Plugin 'kien/ctrlp.vim'
+    Plugin 'Yggdroot/indentLine'
+    Plugin 'terryma/vim-expand-region'
+    Plugin 'plasticboy/vim-markdown'
+    Plugin 'fatih/vim-go'
+    call vundle#end()
+    filetype plugin indent on
 " }
+
+" Use bundles config {
+    if filereadable(expand("~/.vimrc.bundles"))
+        source ~/.vimrc.bundles
+    endif
+" }
+
 
 " General {
     set background=dark         " Assume a dark background
-    if !has('gui')
-        "set term=$TERM          " Make arrow and other keys work
-    endif
-
+    
     set mouse=a                 " Automatically enable mouse usage
     set mousehide               " Hide the mouse cursor while typing
     scriptencoding utf-8
 
-    if has('x') && has('gui')   " On Linux use + register for copy-paste
-        set clipboard=unnamedplus
-    elseif has('gui')           " On Mac and Windows, use * register for copy-paste
-        set clipboard=unnamed
+    if has('clipboard')         " When possible use + register for copy-paste
+        if has('unnamedplus')
+            set clipboard=unnamed,unnamedplus
+        else                    " On mac and Windows, use * register for copy-paste
+            set clipboard=unnamed
+        endif
     endif
 
     " Most prefer to automatically switch to the current file directory when
@@ -82,7 +121,7 @@
     " No annoying sound on errors
     set novisualbell                    " don't beep
     set noerrorbells                    " don't beep
-    set t_vb=
+    set vb t_vb=
     set tm=500
 
     set completeopt=longest,menu
@@ -121,23 +160,26 @@
 
 " Vim UI {
 
-    if filereadable(expand("~/.vim/bundle/vim-colors-solarized/colors/solarized.vim"))
-        let g:solarized_termcolors=256
-        "color solarized                 " Load a colorscheme
-    endif
-        let g:solarized_termtrans=1
-        let g:solarized_contrast="high"
-        let g:solarized_visibility="high"
+    "if filereadable(expand("~/.vim/bundle/vim-colors-solarized/colors/solarized.vim"))
+    "    let g:solarized_termcolors=256
+    "    let g:solarized_termtrans=1
+    "    let g:solarized_contrast="normal"
+    "    let g:solarized_visibility="normal"
+    "    color solarized
+    "endif
+    colorscheme molokai
+    highlight NonText guibg=#060606
+    highlight Folded  guibg=#0A0A0A guifg=#9090D0
 
     set tabpagemax=15               " Only show 15 tabs
     set showmode                    " Display the current mode
     set shortmess=atI
 
     highlight clear SignColumn      " SignColumn should match background for
-                                  " things like vim-gitgutter
+                                     " things like vim-gitgutter
 
     highlight clear LineNr          " Current line number row will have same background color in relative mode.
-                                  " Things like vim-gitgutter will match LineNr highlight
+                                    " Things like vim-gitgutter will match LineNr highlight
     "highlight clear CursorLineNr    " Remove highlight color from current line number
 
     set cursorcolumn                " Highlight current column
@@ -147,7 +189,7 @@
         set ruler                   " Show the ruler
         set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %p%)  " A ruler on steroids
         set showcmd                 " Show partial commands in status line and
-                                  " Selected characters/lines in visual mode
+                                    " Selected characters/lines in visual mode
     endif
 
     if has('statusline')
@@ -177,9 +219,8 @@
     set scrolljump=5                " Lines to scroll when cursor leaves screen
     set foldenable                  " Auto fold code
     set nolist
-
     " Highlight problematic whitespace
-    if has('win32') || has('win64')
+    if WINDOWS()
         set listchars=tab:>-,trail:-,extends:#,nbsp:.
     else
         set listchars=tab:›\ ,trail:•,extends:#,nbsp:.
@@ -190,7 +231,6 @@
 " Formatting {
 
     set nowrap                      " Wrap long lines
-
     set autoindent                  " Indent at the same level of the previous line
     set shiftwidth=4                " Use indents of 4 spaces
     set expandtab                   " Tabs are spaces, not tabs
@@ -205,7 +245,7 @@
 
     set encoding=utf-8
     set fileencoding=utf-8 enc=utf-8 tenc=utf-8
-    set fileencodings=utf-8,chinese,ucs-bom,big5,euc-jp
+    set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
     set termencoding=utf-8
 
     set nobomb                      " no BOM (Byte Order Mark)
@@ -231,6 +271,23 @@
     else
         let mapleader=g:spf13_leader
     endif
+    if !exists('g:spf13_localleader')
+        let maplocalleader = '_'
+    else
+        let maplocalleader = g:spf13_localleader
+    endif
+
+    " Easier moving in tabs and windows
+    " The lines conflict with the default digraph mapping of <C-K>
+    " If you prefer that functionality, and the following to your
+    " .vimrc.before.local file:
+    "   let g:spf13_no_easyWindows = 1
+    if !exists('g:spf13_no_easyWindows')
+        map <C-J> <C-W>j<C-W>_
+        map <C-K> <C-W>k<C-W>_
+        map <C-L> <C-W>l<C-W>_
+        map <C-H> <C-W>h<C-W>_
+    endif
 
     " Wrapped lines goes down/up to next row, rather than next line in file.
     noremap j gj
@@ -239,28 +296,60 @@
     " Yank from the cursor to the end of the line, to be consistent with C and D.
     nnoremap Y y$
 
-    " Toggle search highlighting
-    nmap <silent> <leader>/ :set nohlsearch<CR>
+    " Most prefer to toggle search highlighting rather than clear the current
+    " search results. To clear search highlighting rather than toggle it on
+    " and off, and following to your .vimrc.before.local file:
+    "   let g:spf13_clear_search_highlight = 1
+    "if exists('g:spf13_clear_search_highlight')
+        nmap <silent> <leader>/ :set nohlsearch<CR>
+    "else
+    "    nmap <silent> <leader>/ :set invhlsearch<CR>
+    "endif
 
     " Find merge conflict markers
     map <leader>fc /\v^[<\|=>]{7}( .*\|$)<CR>
 
+    " Shortcuts
     " Change working directory to that of the current file
     cmap cwd lcd %:p:h
     cmap cd. lcd %:p:h
 
-    map <c-j> <c-w>j
-    map <c-k> <c-w>k
-    map <c-h> <c-w>h
-    map <c-l> <c-w>l
+    " Visual shifting (does not exit Visual mode)
+    vnoremap < <gv
+    vnoremap > >gv
+
+    " Allow using the repeat operator with a visual selection (!)
+    " http://stackoverflow.com/a/8064607/127816
+    vnoremap . :normal .<CR>
+
+    " For when you forget to sudo.. Really Write the file.
+    cmap w!! w !sudo tee % >/dev/null
+
+    " Some helpers to edit mode
+    " http://vimcasts.org/e/14
+    cnoremap %% <C-R>=expand('%:h').'/'<CR>
+    map <leader>ew :e %%
+    map <leader>es :sp %%
+    map <leader>ev :vsp %%
+    map <leader>et :tabe %%
+
+    " Adjust viewports to the same size
+    map <leader>= <C-w>=
+
+    " Map <leader>ff to display all lines with keyword under cursor
+    " and ask which one to jump to
+    nmap <leader>ff [I:let nr = input("Which one: ")<Bar>exe "normal " . nr ."[\t"<CR>
+
+    " Easier horizontal scrolling
+    map zl zL
+    map zh zH
+
+    " Easier formatting
+    nnoremap <silent> <leader>q gwip
 
     " Go Home and End using capitalized directions
     noremap H ^
     noremap L $
-
-    "inoremap qq <esc>
-
-    noremap <F1> <esc>
 
     noremap <F2> :set nonumber! number?<cr>
     noremap <F3> :set list! list?<cr>
@@ -271,7 +360,10 @@
     " select all
     noremap <c-a> <esc>ggVG
 
-    if has('gui_win32')
+    " exit insert mode
+    inoremap jj <esc>
+
+    if WINDOWS()
         " Ctrl + C/V/X for copy/past/cut
         map <c-c> "+y
         map <c-v> "+p
@@ -279,111 +371,77 @@
     endif
 " }
 
-" Plugins {
-
-    " Vundle {
-        Bundle 'gmarik/vundle'
-        " vim plugin bundle control, command model
-        " :BundleInstall     install
-        " :BundleInstall!    update
-        " :BundleClean       remove plugin not in list
-    " }
+" Plugin Settings {
 
     " NerdTree {
-        Bundle 'scrooloose/nerdtree'
+        if isdirectory(expand("~/.vim/bundle/nerdtree"))
+            map <C-e> <plug>NERDTreeTabsToggle<CR>
+            map <leader>e :NERDTreeToggle<CR>
+            nmap <leader>nt :NERDTreeFind<CR>
 
-        map <leader>e :NERDTreeToggle<CR>
-        nmap <leader>nt :NERDFreeFind<CR>
-
-        let NERDTreeShowBookmarks=1
-        let NERDTreeMinimalUI=1
-        let NERDTreeIgnore=['\.pyc', '\~$', '\.swo$', '\.swp$', '\.git', '\.hg', '\.svn', '\.bzr']
-        let NERDTreeChDirMode=0
-        let NERDTreeQuitOnOpen=1
-        let NERDTreeMouseMode=2
-        "let NERDTreeShowHidden=1
-        let NERDTreeKeepTreeInNewTab=1
-        let NERDTreeWinSize=30
-        let g:nerdtree_tabs_open_on_gui_startup=0
-        let NERDTreeBookmarksFile=expand("~/.vim/.NERDTreeBookmarks")
+            let NERDTreeShowBookmarks=1
+            let NERDTreeMinimalUI=1
+            let NERDTreeIgnore=['\.pyc', '\~$', '\.swo$', '\.swp$', '\.git', '\.hg', '\.svn', '\.bzr']
+            let NERDTreeChDirMode=0
+            let NERDTreeQuitOnOpen=1
+            let NERDTreeMouseMode=2
+            "let NERDTreeShowHidden=1
+            let NERDTreeKeepTreeInNewTab=1
+            let NERDTreeWinSize=30
+            let g:nerdtree_tabs_open_on_gui_startup=0
+            let NERDTreeBookmarksFile=expand("~/.vim/.NERDTreeBookmarks")
+        endif
     " }
 
     " TagBar {
-        Bundle 'majutsushi/tagbar'
+        if isdirectory(expand("~/.vim/bundle/tagbar"))
+            nnoremap <silent><leader>tt :TagbarToggle<CR>
 
-        nnoremap <silent><leader>tt :TagbarToggle<CR>
-
-        "let g:tagbar_autofocus=1
-        " If using go please install the gotags program using the following
-        " go install github.com/jstemmer/gotags
-        " And make sure gotags is in your path
-        let g:tagbar_type_go = {
-            \ 'ctagstype' : 'go',
-            \ 'kinds'     : [
-                \ 'p:package',
-                \ 'i:imports:1',
-                \ 'c:constants',
-                \ 'v:variables',
-                \ 't:types',
-                \ 'n:interfaces',
-                \ 'w:fields',
-                \ 'e:embedded',
-                \ 'm:methods',
-                \ 'r:constructor',
-                \ 'f:functions'
-            \ ],
-            \ 'sro' : '.',
-            \ 'kind2scope' : {
-                \ 't' : 'ctype',
-                \ 'n' : 'ntype'
-            \ },
-            \ 'scope2kind' : {
-                \ 'ctype' : 't',
-                \ 'ntype' : 'n'
-            \ },
-            \ 'ctagsbin' : 'gotags',
-            \ 'ctagsargs' : '-sort'
-        \ }
-        let g:tarbar_compact = 1    " doesn't show 'help' in top of window
+            "let g:tagbar_autofocus=1
+            " If using go please install the gotags program using the following
+            " go install github.com/jstemmer/gotags
+            " And make sure gotags is in your path
+            let g:tagbar_type_go = {
+                \ 'ctagstype' : 'go',
+                \ 'kinds'     : [
+                    \ 'p:package',
+                    \ 'i:imports:1',
+                    \ 'c:constants',
+                    \ 'v:variables',
+                    \ 't:types',
+                    \ 'n:interfaces',
+                    \ 'w:fields',
+                    \ 'e:embedded',
+                    \ 'm:methods',
+                    \ 'r:constructor',
+                    \ 'f:functions'
+                    \ ],
+                \ 'sro' : '.',
+                \ 'kind2scope' : { 't' : 'ctype', 'n' : 'ntype' },
+                \ 'scope2kind' : { 'ctype' : 't', 'ntype' : 'n' },
+                \ 'ctagsbin' : 'gotags',
+                \ 'ctagsargs' : '-sort'
+                \ }
+            let g:tarbar_compact = 1    " doesn't show 'help' in top of window
+        endif
     " }
 
     " Vim-EasyMotion {
-        Bundle 'Lokaltog/vim-easymotion'
         " Default Trigger Key is <leader><leader>
         " example: type <leader><leader>w to trigger the word motion
         "          type <leader><leader>fo to trigger search 'o' character
     " }
 
-    " Vim-Colors-Solarized {
-        Bundle 'altercation/vim-colors-solarized'
-
-        if filereadable(expand("~/.vim/bundle/vim-colors-solarized/colors/solarized.vim"))
-            colorscheme solarized
-            set t_Co=256
-        endif
-
-    " }
-
-    " Vim-Powerline {
-        "Bundle 'Lokaltog/vim-powerline'
-
-        "let g:Powerline_symbols='fancy'
-    " }
-
-    " Vim-Airline {
-        Bundle 'bling/vim-airline'
-
+    " vim-airline {
         let g:airline_powerline_fonts=1
         let g:airline_theme='dark'
+        let g:airline#extensions#tabline#enabled=1
         "let g:airline_enable_branch=1
         "let g:airline_enable_syntastic=1
         "let g:airline_detect_paste=1
-        "let g:airline_theme='dark'
     " }
 
     " CtrlP {
-        Bundle 'kien/ctrlp.vim'
-
         nnoremap <silent><leader>t :CtrlP<CR>
         nnoremap <silent><leader>r :CtrlPMRU<CR>
         nnoremap <silent><leader>b :CtrlPBuffer<CR>
@@ -422,41 +480,25 @@
     " }
 
     " IndentLine {
-        Bundle 'Yggdroot/indentLine'
-
         let g:indentLine_noConcealCursor=1
         let g:indentLine_color_term=0
         let g:indentLine_char='¦'
     " }
 
     " Vim-Expand-Region {
-        Bundle 'terryma/vim-expand-region'
-
         map = <Plug>(expand-region-expand)
         map - <Plug>(expand-region-shrink)
     " }
 
-    " Vim-Youdao-Translater {
-        Bundle 'ianva/vim-youdao-translater'
-
-        nnoremap <silent><leader>yd <esc>:Ydc<CR>
+    " Vim-Markdown {
+        let g:vim_markdown_folding_disabled=1
     " }
 
-    " Vim-Gocode {
-        Bundle 'Blackrush/vim-gocode'
-    " }
-
-
-    " Vim-Golang {
-    "    Bundle 'jnwhiteh/vim-golang'
-    " }
-
-    syntax on
-    filetype plugin indent on        " Automatically detect file type
-    "syntax on                        " Syntax highlighting
 " }
 
 " GUI Settings {
+
+    set t_Co=256                     " Enable for iTerm2 display color
 
     if has('gui_running')
 
@@ -467,8 +509,6 @@
         set guioptions-=L            " Exclude Left-hand scrollbar even there is a vertically split window
         set guioptions-=m            " Exclude Menu bar
         set showtabline=1
-
-        set t_Co=256
 
         " Disable cursor flash
         set guicursor=a:block-blinkon0
@@ -491,13 +531,5 @@
             "map <c-x> "+x
         endif
 
-    else
-        if &term == 'xterm' || &term == 'screen'
-            set t_Co=256            " Enable 256 colors to stop the CSApprox warning and make xterm vim shine
-        endif
-        "set term=builtin_ansi       " Make arrow and other keys work
     endif
-
 " }
-
-
