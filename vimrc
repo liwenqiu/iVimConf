@@ -2,12 +2,11 @@
 " Modeline and Notes {
 "
 "   This is the personal .vimrc file of Venture Lee.
-"
-"   You can find me at http://liwenqiu.mc
+"   You can find me at http://liwenqiu.me
 "  }
 
 " Environment {
-
+  
     " Identify platform {
         silent function! OSX()
             return has('macunix')
@@ -39,12 +38,6 @@
     set imsearch=-1
 " }
 
-" Use vimrc beform if available {
-    if filereadable(expand("~/.vimrc.before"))
-        source ~/.vimrc.before
-    endif
-" }
-
 " Plugins {
     " no compatible with the old-fashion vi mode
     set nocompatible
@@ -52,35 +45,28 @@
     " set the runtime path to include Vundle and initialize
     set rtp+=~/.vim/bundle/Vundle.vim
 
-    call vundle#begin()
     " :PluginList          - list configured plugins
     " :PluginInstall(!)    - install (update) plugins
     " :PluginUpdate        - update plugins
     " :PluginSearch(!) foo - search (or refresh cache first) for foo
     " :PluginClean(!)      - confirm (or auto-approve) removal of unused plguins
 
+    call vundle#begin()
+
     Plugin 'gmarik/Vundle.vim'
     Plugin 'scrooloose/nerdtree'
+    Plugin 'bling/vim-airline'
     Plugin 'majutsushi/tagbar'
     Plugin 'Lokaltog/vim-easymotion'
-    Plugin 'spiiph/vim-space'
-    "Plugin 'altercation/vim-colors-solarized'
     Plugin 'tomasr/molokai'
-    "Plugin 'Lokaltog/vim-powerline'
-    Plugin 'bling/vim-airline'
     Plugin 'kien/ctrlp.vim'
     Plugin 'Yggdroot/indentLine'
     Plugin 'terryma/vim-expand-region'
     Plugin 'plasticboy/vim-markdown'
     Plugin 'fatih/vim-go'
+    Plugin 'toyamarinyon/vim-swift'
     call vundle#end()
     filetype plugin indent on
-" }
-
-" Use bundles config {
-    if filereadable(expand("~/.vimrc.bundles"))
-        source ~/.vimrc.bundles
-    endif
 " }
 
 
@@ -260,34 +246,20 @@
 " }
 
 " Key (re)Mappings {
-    " The default leader is '\', but many people prefer ',' as it's in a
-    " standard
-    " locations. To override this behavior and set it back to '\' (or any
-    " other
-    " character) add the following to your .vimrc.bundles.local file:
-    "   let g:spf13_leader='\'
-    if !exists('g:spf13_leader')
-        let mapleader = ','
-    else
-        let mapleader=g:spf13_leader
-    endif
-    if !exists('g:spf13_localleader')
-        let maplocalleader = '_'
-    else
-        let maplocalleader = g:spf13_localleader
-    endif
+
+    let mapleader = ","
+
+    nnoremap <leader>w :w<CR>
+
+    " Type 12<Enter> to go to line 12 ( 12G breaks my wrist )
+    " Hit Enter to go to end of file
+    nnoremap <CR> G
 
     " Easier moving in tabs and windows
-    " The lines conflict with the default digraph mapping of <C-K>
-    " If you prefer that functionality, and the following to your
-    " .vimrc.before.local file:
-    "   let g:spf13_no_easyWindows = 1
-    if !exists('g:spf13_no_easyWindows')
-        map <C-J> <C-W>j<C-W>_
-        map <C-K> <C-W>k<C-W>_
-        map <C-L> <C-W>l<C-W>_
-        map <C-H> <C-W>h<C-W>_
-    endif
+    map <C-J> <C-W>j<C-W>_
+    map <C-K> <C-W>k<C-W>_
+    map <C-L> <C-W>l<C-W>_
+    map <C-H> <C-W>h<C-W>_
 
     " Wrapped lines goes down/up to next row, rather than next line in file.
     noremap j gj
@@ -298,13 +270,8 @@
 
     " Most prefer to toggle search highlighting rather than clear the current
     " search results. To clear search highlighting rather than toggle it on
-    " and off, and following to your .vimrc.before.local file:
-    "   let g:spf13_clear_search_highlight = 1
-    "if exists('g:spf13_clear_search_highlight')
-        nmap <silent> <leader>/ :set nohlsearch<CR>
-    "else
-    "    nmap <silent> <leader>/ :set invhlsearch<CR>
-    "endif
+    " and off
+    nmap <silent> <leader>/ :set nohlsearch<CR>
 
     " Find merge conflict markers
     map <leader>fc /\v^[<\|=>]{7}( .*\|$)<CR>
@@ -359,9 +326,6 @@
 
     " select all
     noremap <c-a> <esc>ggVG
-
-    " exit insert mode
-    inoremap jj <esc>
 
     if WINDOWS()
         " Ctrl + C/V/X for copy/past/cut
@@ -434,8 +398,10 @@
 
     " vim-airline {
         let g:airline_powerline_fonts=1
-        let g:airline_theme='dark'
+        let g:airline_theme='molokai'
         let g:airline#extensions#tabline#enabled=1
+        let g:airline#extensions#tabline#show_buffers=1
+        let g:airline#extensions#tabline#fnamemod=':t'
         "let g:airline_enable_branch=1
         "let g:airline_enable_syntastic=1
         "let g:airline_detect_paste=1
@@ -486,8 +452,8 @@
     " }
 
     " Vim-Expand-Region {
-        map = <Plug>(expand-region-expand)
-        map - <Plug>(expand-region-shrink)
+        vmap v <Plug>(expand_region_expand)
+        vmap <c-v> <Plug>(expand_region_shrink)
     " }
 
     " Vim-Markdown {
@@ -514,8 +480,9 @@
         set guicursor=a:block-blinkon0
 
         if has('gui_macvim')
+            set guifont=PT\ Mono\ for\ Powerline
             "set guifont=Source\ Code\ Pro\ for\ Powerline:h12
-            set guifont=Menlo\ for\ Powerline:h11
+            "set guifont=Menlo\ for\ Powerline:h11
             "set guifont=DejaVn\ Sans\ Mono\ for\ Powerline
 
             "set transparency=5      " Make the window slightly transparent
